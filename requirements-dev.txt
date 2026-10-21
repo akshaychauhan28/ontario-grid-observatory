@@ -1,0 +1,6 @@
+-r requirements.txt
+dbt-duckdb
+pytest
+ruff
+sqlfluff
+python-dotenv
