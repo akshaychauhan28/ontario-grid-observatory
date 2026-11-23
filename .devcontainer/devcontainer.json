@@ -1,8 +1,10 @@
 {
   "name": "grid-observatory",
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
-  "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+   "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "moby": false
+    }
   },
   "hostRequirements": { "cpus": 4 },
   "forwardPorts": [8080, 9001],
