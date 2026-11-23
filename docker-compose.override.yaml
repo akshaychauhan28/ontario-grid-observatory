@@ -1,3 +1,12 @@
+x-grid-airflow: &grid-airflow
+  environment:
+    S3_ENDPOINT_URL: http://rustfs:9000
+    RUSTFS_ACCESS_KEY: ${RUSTFS_ACCESS_KEY:-rustfsadmin}
+    RUSTFS_SECRET_KEY: ${RUSTFS_SECRET_KEY:-rustfsadmin_secret}
+    PYTHONPATH: /opt/airflow/project
+  volumes:
+    - ./ingestion:/opt/airflow/project/ingestion
+
 services:
   rustfs:
     image: rustfs/rustfs:latest
@@ -11,6 +20,13 @@ services:
     volumes:
       - rustfs-data:/data
     restart: always
+
+  airflow-worker:
+    <<: *grid-airflow
+  airflow-dag-processor:
+    <<: *grid-airflow
+  airflow-scheduler:
+    <<: *grid-airflow
 
 volumes:
   rustfs-data:
